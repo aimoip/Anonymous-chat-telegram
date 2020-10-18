@@ -45,6 +45,16 @@ def generate_markup():
     return markup
 
 
+def generate_markup_home():
+    """
+    Create menu with two buttons: 'Like' and 'Dislike'
+    :return: ReplyKeyboardMarkup
+    """
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
+    markup.add(جستجوی جدید)
+    return markup
+
+
 def generate_markup_for_gender_finder():
     """
     Create menu with two buttons: 'Like' and 'Dislike'
@@ -53,6 +63,7 @@ def generate_markup_for_gender_finder():
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
     markup.add("pesar mikham")
     markup.add("dokhtar mikham")
+    markup.add("farghi nadare")
     return markup
 
 
@@ -145,7 +156,7 @@ def echo(message):
 
     if flag:
         delete_info(user_to_id)
-        menu = inline_menu()
+        menu = generate_markup_home()
         bot.send_message(user_id, m_play_again, reply_markup=menu)
         bot.send_message(user_to_id, m_play_again, reply_markup=menu)
 
@@ -189,6 +200,10 @@ def echo(message):
 
         bot.send_voice(communications[user_id]['UserTo'], message.voice.file_id)
     elif message.content_type == 'text':
+        if message.text=="جستجوی جدید":
+            keyboard=generate_markup_for_gender_finder()
+            bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
+            return
         if message.text=="من پسرم":
             add_users(chat=message.chat,g=1)
             keyboard=generate_markup_for_gender_finder()
@@ -202,7 +217,8 @@ def echo(message):
         elif message.text=="pesar mikham":
             user_to_id = None
             if len(free_users) < 2:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             if free_users[user_id]['state'] == 0:
@@ -214,7 +230,8 @@ def echo(message):
                     break
 
             if user_to_id is None:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             keyboard = generate_markup()
@@ -227,7 +244,8 @@ def echo(message):
         elif message.text=="dokhtar mikham":
             user_to_id = None
             if len(free_users) < 2:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             if free_users[user_id]['state'] == 0:
@@ -239,7 +257,8 @@ def echo(message):
                     break
 
             if user_to_id is None:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             keyboard = generate_markup()
@@ -248,10 +267,11 @@ def echo(message):
 
             bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
             bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
-        elif message.text=="fargh nadare":
+        elif message.text=="farghi nadare":
             user_to_id = None
             if len(free_users) < 2:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             if free_users[user_id]['state'] == 0:
@@ -263,7 +283,8 @@ def echo(message):
                     break
 
             if user_to_id is None:
-                bot.send_message(user_id, m_is_not_free_users)
+                keyboard=generate_markup_home()
+                bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
             keyboard = generate_markup()
@@ -286,80 +307,6 @@ def echo(message):
                                  reply_to_message_id=message.reply_to_message.message_id - 1)
             else:
                 bot.send_message(user_id, m_send_some_messages)
-
-
-@bot.callback_query_handler(func=lambda call: True)
-def echo(call):
-    """
-    Create new chat.
-    All users are divided into two categories: receivers and emitters.
-    If bot finds pair, then it creates new chat.
-    :param call:
-    :return:
-    """
-    print("call.data",call.data)
-    if (call.data):
-        print("we are inside the if")
-        user_id = call.message.chat.id
-        user_to_id = None
-        gender=bool(call.data)
-        print(gender)
-        add_users(chat=call.message.chat,g=gender)
-        keyboard = generate_markup_for_gender_finder()
-        bot.send_message(user_id, "pesar mikhay ya dokhta?",reply_markup=keyboard)
-
-
-        if len(free_users) < 2:
-            bot.send_message(user_id, m_is_not_free_users)
-            return
-
-        if free_users[user_id]['state'] == 0:
-            return
-
-        for user in free_users:
-            if user['state'] == 0:
-                user_to_id = user['ID']
-                break
-
-        if user_to_id is None:
-            bot.send_message(user_id, m_is_not_free_users)
-            return
-
-        keyboard = generate_markup()
-
-        add_communications(user_id, user_to_id)
-
-        bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
-        bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
-    if call.data == 'NewChat':
-        user_id = call.message.chat.id
-        user_to_id = None
-
-        add_users(chat=call.message.chat)
-
-        if len(free_users) < 2:
-            bot.send_message(user_id, m_is_not_free_users)
-            return
-
-        if free_users[user_id]['state'] == 0:
-            return
-
-        for user in free_users:
-            if user['state'] == 0:
-                user_to_id = user['ID']
-                break
-
-        if user_to_id is None:
-            bot.send_message(user_id, m_is_not_free_users)
-            return
-
-        keyboard = generate_markup()
-
-        add_communications(user_id, user_to_id)
-
-        bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
-        bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
-
 
 if __name__ == '__main__':
     recovery_data()
