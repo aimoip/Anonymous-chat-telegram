@@ -46,6 +46,17 @@ def generate_markup():
     return markup
 
 
+def generate_markup_for_gender_finder():
+    """
+    Create menu with two buttons: 'Like' and 'Dislike'
+    :return: ReplyKeyboardMarkup
+    """
+    markup = types.ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
+    markup.add("pesar mikham")
+    markup.add("dokhtar mikham")
+    return markup
+
+
 def connect_user(user_id):
     """
     :param user_id: Chat id with user
@@ -210,6 +221,9 @@ def echo(call):
         gender=bool(call.data)
         print(gender)
         add_users(chat=call.message.chat,g=gender)
+        keyboard = generate_markup_for_gender_finder()
+        bot.send_message(user_id, "pesar mikhay ya dokhta?",reply_markup=keyboard)
+
 
         if len(free_users) < 2:
             bot.send_message(user_id, m_is_not_free_users)
