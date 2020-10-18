@@ -140,7 +140,7 @@ def recovery_data():
         communications[i.userToID] = {'UserTo': first.id, 'UserName': first.username, 'like': first.like}
 
     for i in s.query(User).filter(User.status == 0).all():
-        add_users(user_chat_id=i.id, username=i.username,g==i.gender)
+        add_users(user_chat_id=i.id, username=i.username,g=i.gender)
 
     s.close()
 
