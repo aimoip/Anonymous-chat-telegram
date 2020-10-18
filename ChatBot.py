@@ -309,7 +309,7 @@ def echo(message):
                        user_to_id = user['ID']
                        user['state']=0
                        free_users[user_id]['state']=0
-                        break
+                       break
             if free_users[user_id]['gender']==True:
                 for user in free_users:
                     if ((user['state'] == 1 or user['state'] == 3)  and user['ID']!=user_id):
