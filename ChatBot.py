@@ -189,6 +189,11 @@ def echo(message):
 
         bot.send_voice(communications[user_id]['UserTo'], message.voice.file_id)
     elif message.content_type == 'text':
+        if message.text=="man pesaram":
+            add_users(chat=message.chat,g=1)
+        elif message.text=="man dokhtaram":
+            add_users(chat=message.chat,g=0)
+            
         if message.text != '/start' and message.text != '/stop' and \
                     message.text != dislike_str and message.text != like_str and message.text != 'NewChat':
 
