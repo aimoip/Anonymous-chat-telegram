@@ -143,8 +143,8 @@ def echo(message):
     if message.text == dislike_str:
         bot.send_message(user_id, m_dislike_user, reply_markup=types.ReplyKeyboardRemove())
         bot.send_message(user_to_id, m_dislike_user_to, reply_markup=types.ReplyKeyboardRemove())
-        free_users[user_id]['state']=0
-        free_users[user_to_id]['state']=0
+        free_users[user_id]['state']=1
+        free_users[user_to_id]['state']=1
         flag = True
     else:
         bot.send_message(user_id, m_like, reply_markup=types.ReplyKeyboardRemove())
