@@ -28,8 +28,7 @@ def inline_menu_for_start():
     """
     callback_boy_button = types.InlineKeyboardButton(text='من پسرم', callback_data='1')
     callback_girl_button = types.InlineKeyboardButton(text='من دخترم', callback_data='0')
-
-    menu = types.InlineKeyboardMarkup(one_time_keyboard=True)
+    menu = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     menu.add(callback_boy_button,callback_girl_button)
 
     return menu
