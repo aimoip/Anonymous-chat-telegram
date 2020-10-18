@@ -43,10 +43,10 @@ def add_users(chat=None, user_chat_id=None, username=None,g=False):
         return
 
     if in_users >= out_users:
-        free_users[user_id] = {'state': 0, 'ID': user_id, 'UserName': user_name}
+        free_users[user_id] = {'state': 0, 'ID': user_id, 'UserName': user_name,'gender':g}
         out_users = out_users + 1
     elif in_users < out_users:
-        free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name}
+        free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name,'gender':g}
         in_users = in_users + 1
 
     s = session()
@@ -140,7 +140,7 @@ def recovery_data():
         communications[i.userToID] = {'UserTo': first.id, 'UserName': first.username, 'like': first.like}
 
     for i in s.query(User).filter(User.status == 0).all():
-        add_users(user_chat_id=i.id, username=i.username)
+        add_users(user_chat_id=i.id, username=i.username,g==i.gender)
 
     s.close()
 
