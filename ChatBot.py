@@ -202,11 +202,14 @@ def echo(call):
     :param call:
     :return:
     """
-    if call.data == 0 or call.data==1:
+    print("call.data",call.data)
+    if (call.data):
+        print("we are inside the if")
         user_id = call.message.chat.id
         user_to_id = None
-
-        add_users(chat=call.message.chat,g=call.data)
+        gender=bool(call.data)
+        print(gender)
+        add_users(chat=call.message.chat,g=gender)
 
         if len(free_users) < 2:
             bot.send_message(user_id, m_is_not_free_users)
