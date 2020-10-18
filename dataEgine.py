@@ -47,8 +47,9 @@ def add_users(chat=None, user_chat_id=None, username=None,g=False):
         out_users = out_users + 1
     elif in_users < out_users:
         free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name,'gender':g}
-        in_users = in_users + 1"""
-
+        in_users = in_users + 1
+        
+"""
     s = session()
     print("we were here and g was",g)
     if len(s.query(User).filter(User.id == user_id).all()) > 0:
