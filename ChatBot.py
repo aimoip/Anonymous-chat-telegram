@@ -29,7 +29,7 @@ def inline_menu_for_start():
     callback_boy_button = types.InlineKeyboardButton(text='من پسرم', callback_data='1')
     callback_girl_button = types.InlineKeyboardButton(text='من دخترم', callback_data='0')
 
-    menu = types.InlineKeyboardMarkup()
+    menu = types.InlineKeyboardMarkup(one_time_keyboard=True)
     menu.add(callback_boy_button,callback_girl_button)
 
     return menu
@@ -55,6 +55,7 @@ def generate_markup_for_gender_finder():
     markup.add("pesar mikham")
     markup.add("dokhtar mikham")
     return markup
+
 
 
 def connect_user(user_id):
@@ -85,7 +86,7 @@ def echo(message):
 
     menu = inline_menu_for_start()
 
-    bot.send_message(user_id, m_start, reply_markup=menu)
+    bot.send_message(user_id, m_start, reply_markup=menu,)
 
 
 @bot.message_handler(commands=['stop'])
