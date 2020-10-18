@@ -199,6 +199,80 @@ def echo(message):
             keyboard=generate_markup_for_gender_finder()
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
+        elif message.text=="pesar mikham":
+            user_to_id = None
+            if len(free_users) < 2:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            if free_users[user_id]['state'] == 0:
+                return
+
+            for user in free_users:
+                if user['state'] == 0 and user['gender']==True:
+                    user_to_id = user['ID']
+                    break
+
+            if user_to_id is None:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            keyboard = generate_markup()
+
+            add_communications(user_id, user_to_id)
+
+            bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
+            bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
+            
+        elif message.text=="dokhtar mikham":
+            user_to_id = None
+            if len(free_users) < 2:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            if free_users[user_id]['state'] == 0:
+                return
+
+            for user in free_users:
+                if user['state'] == 0 and user['gender']==False:
+                    user_to_id = user['ID']
+                    break
+
+            if user_to_id is None:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            keyboard = generate_markup()
+
+            add_communications(user_id, user_to_id)
+
+            bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
+            bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
+        elif message.text=="fargh nadare":
+            user_to_id = None
+            if len(free_users) < 2:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            if free_users[user_id]['state'] == 0:
+                return
+
+            for user in free_users:
+                if user['state'] == 0:
+                    user_to_id = user['ID']
+                    break
+
+            if user_to_id is None:
+                bot.send_message(user_id, m_is_not_free_users)
+                return
+
+            keyboard = generate_markup()
+
+            add_communications(user_id, user_to_id)
+
+            bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
+            bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
+            
         if message.text != '/start' and message.text != '/stop' and \
                     message.text != dislike_str and message.text != like_str and message.text != 'NewChat':
 
