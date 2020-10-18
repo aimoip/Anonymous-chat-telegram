@@ -143,6 +143,8 @@ def echo(message):
     if message.text == dislike_str:
         bot.send_message(user_id, m_dislike_user, reply_markup=types.ReplyKeyboardRemove())
         bot.send_message(user_to_id, m_dislike_user_to, reply_markup=types.ReplyKeyboardRemove())
+        free_users[user_id]['state']=0
+        free_users[user_to_id]['state']=0
         flag = True
     else:
         bot.send_message(user_id, m_like, reply_markup=types.ReplyKeyboardRemove())
@@ -222,12 +224,14 @@ def echo(message):
                 bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
-            if free_users[user_id]['state'] == 0:
-                return
+         #   if free_users[user_id]['state'] == 0:
+          #      return
 
             for user in free_users:
                 if user['state'] == 0 and user['gender']==True:
                     user_to_id = user['ID']
+                    user['state']=1
+                    free_users[user_id][state]=1
                     break
 
             if user_to_id is None:
