@@ -16,7 +16,7 @@ Base.metadata.create_all(bind=engine)
 session = sessionmaker(bind=engine)
 
 
-def add_users(chat=None, user_chat_id=None, username=None):
+def add_users(chat=None, user_chat_id=None, username=None,g):
     """
     This function add new user in Data Base.
     Information about user_chat_id and username you can take from chat, but Data Base save only
@@ -52,6 +52,7 @@ def add_users(chat=None, user_chat_id=None, username=None):
     s = session()
     if len(s.query(User).filter(User.id == user_id).all()) > 0:
         s.query(User).filter(User.id == user_id).update({'status': 0})
+        s.query(User).filter(User.id == user_id).update({gender:g})
 
         s.commit()
         s.close()
