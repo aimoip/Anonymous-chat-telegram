@@ -41,7 +41,7 @@ def add_users(chat=None, user_chat_id=None, username=None,g=False):
 
     if user_id in free_users:
         return
-
+    free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name,'gender':g}
     #if in_users >= out_users:
     #   free_users[user_id] = {'state': 0, 'ID': user_id, 'UserName': user_name,'gender':g}
     #   out_users = out_users + 1
