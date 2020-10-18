@@ -227,7 +227,7 @@ def echo(message):
 
          #   if free_users[user_id]['state'] == 0:
           #      return
-            if free_users[user_id]['gender']=True:
+            if free_users[user_id]['gender']==True:
                 for user in free_users:
                     if ((user['state'] == 1 or user['state'] == 3) and user['gender']==True and user['ID']!=user_id):
                         user_to_id = user['ID']
@@ -236,7 +236,7 @@ def echo(message):
                         break
                     
                     
-            if free_users[user_id]['gender']=False:
+            if free_users[user_id]['gender']==False:
                 for user in free_users:
                     if ((user['state'] == 2 or user['state'] == 3) and user['gender']== True and user['ID']!=user_id):
                         user_to_id = user['ID']
@@ -266,7 +266,7 @@ def echo(message):
 
            # if free_users[user_id]['state'] == 0:
             #    return
-            if free_users[user_id]['gender']=True:
+            if free_users[user_id]['gender']==True:
                 for user in free_users:
                     if ((user['state'] == 1 or user['state'] == 3) and user['gender']==False and user['ID']!=user_id) :
                         user['state']=0
@@ -274,7 +274,7 @@ def echo(message):
                         user_to_id = user['ID']
                         break
             
-            if free_users[user_id]['gender']=False:
+            if free_users[user_id]['gender']==False:
                 for user in free_users:
                     if ((user['state'] == 2 or user['state'] == 3) and user['gender']==False and user['ID']!=user_id) :
                         user['state']=0
@@ -303,14 +303,14 @@ def echo(message):
 
            # if free_users[user_id]['state'] == 0:
             #    return
-            if free_users[user_id]['gender']=False:
+            if free_users[user_id]['gender']==False:
                 for user in free_users:
                     if ((user['state'] == 2 or user['state'] == 3)  and user['ID']!=user_id):
                        user_to_id = user['ID']
                        user['state']=0
                        free_users[user_id]['state']=0
                       break
-            if free_users[user_id]['gender']=True:
+            if free_users[user_id]['gender']==True:
                 for user in free_users:
                     if ((user['state'] == 1 or user['state'] == 3)  and user['ID']!=user_id):
                        user_to_id = user['ID']
