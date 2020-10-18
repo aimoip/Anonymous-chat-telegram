@@ -218,6 +218,7 @@ def echo(message):
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
         elif message.text=="pesar mikham":
+            free_users[user_id]['state']=0
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
@@ -231,7 +232,7 @@ def echo(message):
                 if user['state'] == 0 and user['gender']==True:
                     user_to_id = user['ID']
                     user['state']=1
-                    free_users[user_id][state]=1
+                    free_users[user_id]['state']=1
                     break
 
             if user_to_id is None:
@@ -247,17 +248,20 @@ def echo(message):
             bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
             
         elif message.text=="dokhtar mikham":
+            free_users[user_id]['state']=0
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
                 bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
-            if free_users[user_id]['state'] == 0:
-                return
+           # if free_users[user_id]['state'] == 0:
+            #    return
 
             for user in free_users:
                 if user['state'] == 0 and user['gender']==False:
+                    user['state']=1
+                    free_users[user_id]['state']=1
                     user_to_id = user['ID']
                     break
 
@@ -273,18 +277,21 @@ def echo(message):
             bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
             bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
         elif message.text=="farghi nadare":
+            free_users[user_id]['state']=0
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
                 bot.send_message(user_id, m_is_not_free_users,reply_markup=keyboard)
                 return
 
-            if free_users[user_id]['state'] == 0:
-                return
+           # if free_users[user_id]['state'] == 0:
+            #    return
 
             for user in free_users:
                 if user['state'] == 0:
                     user_to_id = user['ID']
+                    user['state']=1
+                    free_users[user_id]['state']=1
                     break
 
             if user_to_id is None:
