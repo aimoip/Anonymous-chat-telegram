@@ -208,12 +208,12 @@ def echo(message):
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
         if message.text=="من پسرم":
-            add_users(chat=message.chat,g=1)
+            add_users(chat=message.chat,g=True)
             keyboard=generate_markup_for_gender_finder()
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
         elif message.text=="من دخترم":
-            add_users(chat=message.chat,g=0)
+            add_users(chat=message.chat,g=False)
             keyboard=generate_markup_for_gender_finder()
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
