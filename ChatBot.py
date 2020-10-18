@@ -51,7 +51,7 @@ def generate_markup_home():
     :return: ReplyKeyboardMarkup
     """
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
-    markup.add(جستجوی جدید)
+    markup.add('جستجوی جدید')
     return markup
 
 
