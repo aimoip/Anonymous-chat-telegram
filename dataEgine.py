@@ -109,8 +109,8 @@ def add_communications(user_id, user_to_id):
 
     print(communications[user_id], ' ', communications[user_to_id])
 
-    free_users.delete(user_id)
-    free_users.delete(user_to_id)
+    free_users[user_id]['state']=1
+    free_users[user_to_id]['state']=1
 
     s = session()
 
