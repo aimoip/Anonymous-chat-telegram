@@ -191,9 +191,14 @@ def echo(message):
     elif message.content_type == 'text':
         if message.text=="من پسرم":
             add_users(chat=message.chat,g=1)
+            keyboard=generate_markup_for_gender_finder()
+            bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
+            return
         elif message.text=="من دخترم":
             add_users(chat=message.chat,g=0)
-            
+            keyboard=generate_markup_for_gender_finder()
+            bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
+            return
         if message.text != '/start' and message.text != '/stop' and \
                     message.text != dislike_str and message.text != like_str and message.text != 'NewChat':
 
