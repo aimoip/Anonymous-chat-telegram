@@ -218,7 +218,7 @@ def echo(message):
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
         elif message.text=="pesar mikham":
-            free_users[user_id]['state']=0
+            free_users[user_id]['state']=1
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
@@ -227,13 +227,22 @@ def echo(message):
 
          #   if free_users[user_id]['state'] == 0:
           #      return
-
-            for user in free_users:
-                if user['state'] == 0 and user['gender']==True and user['ID']!=user_id:
-                    user_to_id = user['ID']
-                    user['state']=1
-                    free_users[user_id]['state']=1
-                    break
+            if free_users[user_id]['gender']=True:
+                for user in free_users:
+                    if ((user['state'] == 1 or user['state'] == 3) and user['gender']==True and user['ID']!=user_id):
+                        user_to_id = user['ID']
+                        user['state']=0
+                        free_users[user_id]['state']=0
+                        break
+                    
+                    
+            if free_users[user_id]['gender']=False:
+                for user in free_users:
+                    if ((user['state'] == 2 or user['state'] == 3) and user['gender']== True and user['ID']!=user_id):
+                        user_to_id = user['ID']
+                        user['state']=0
+                        free_users[user_id]['state']=0
+                        break
 
             if user_to_id is None:
                 keyboard=generate_markup_home()
@@ -248,7 +257,7 @@ def echo(message):
             bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
             
         elif message.text=="dokhtar mikham":
-            free_users[user_id]['state']=0
+            free_users[user_id]['state']=2
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
@@ -257,13 +266,21 @@ def echo(message):
 
            # if free_users[user_id]['state'] == 0:
             #    return
-
-            for user in free_users:
-                if user['state'] == 0 and user['gender']==False and user['ID']!=user_id :
-                    user['state']=1
-                    free_users[user_id]['state']=1
-                    user_to_id = user['ID']
-                    break
+            if free_users[user_id]['gender']=True:
+                for user in free_users:
+                    if ((user['state'] == 1 or user['state'] == 3) and user['gender']==False and user['ID']!=user_id) :
+                        user['state']=0
+                        free_users[user_id]['state']=0
+                        user_to_id = user['ID']
+                        break
+            
+            if free_users[user_id]['gender']=False:
+                for user in free_users:
+                    if ((user['state'] == 2 or user['state'] == 3) and user['gender']==False and user['ID']!=user_id) :
+                        user['state']=0
+                        free_users[user_id]['state']=0
+                        user_to_id = user['ID']
+                        break
 
             if user_to_id is None:
                 keyboard=generate_markup_home()
@@ -277,7 +294,7 @@ def echo(message):
             bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
             bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
         elif message.text=="farghi nadare":
-            free_users[user_id]['state']=0
+            free_users[user_id]['state']=3
             user_to_id = None
             if len(free_users) < 2:
                 keyboard=generate_markup_home()
@@ -286,13 +303,20 @@ def echo(message):
 
            # if free_users[user_id]['state'] == 0:
             #    return
-
-            for user in free_users:
-                if user['state'] == 0 and user['ID']!=user_id:
-                    user_to_id = user['ID']
-                    user['state']=1
-                    free_users[user_id]['state']=1
-                    break
+            if free_users[user_id]['gender']=False:
+                for user in free_users:
+                    if ((user['state'] == 2 or user['state'] == 3)  and user['ID']!=user_id):
+                       user_to_id = user['ID']
+                       user['state']=0
+                       free_users[user_id]['state']=0
+                      break
+            if free_users[user_id]['gender']=True:
+                for user in free_users:
+                    if ((user['state'] == 1 or user['state'] == 3)  and user['ID']!=user_id):
+                       user_to_id = user['ID']
+                       user['state']=0
+                       free_users[user_id]['state']=0
+                      break
 
             if user_to_id is None:
                 keyboard=generate_markup_home()
