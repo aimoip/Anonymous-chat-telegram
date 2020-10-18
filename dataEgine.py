@@ -41,15 +41,13 @@ def add_users(chat=None, user_chat_id=None, username=None,g=False):
 
     if user_id in free_users:
         return
-"""
-    if in_users >= out_users:
-        free_users[user_id] = {'state': 0, 'ID': user_id, 'UserName': user_name,'gender':g}
-        out_users = out_users + 1
-    elif in_users < out_users:
-        free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name,'gender':g}
-        in_users = in_users + 1
-        
-"""
+
+    #if in_users >= out_users:
+    #   free_users[user_id] = {'state': 0, 'ID': user_id, 'UserName': user_name,'gender':g}
+    #   out_users = out_users + 1
+    #elif in_users < out_users:
+    #   free_users[user_id] = {'state': 1, 'ID': user_id, 'UserName': user_name,'gender':g}
+    #   in_users = in_users + 1     
     s = session()
     print("we were here and g was",g)
     if len(s.query(User).filter(User.id == user_id).all()) > 0:
