@@ -229,7 +229,7 @@ def echo(message):
           #      return
 
             for user in free_users:
-                if user['state'] == 0 and user['gender']==True:
+                if user['state'] == 0 and user['gender']==True and user[user_id]!=user_id:
                     user_to_id = user['ID']
                     user['state']=1
                     free_users[user_id]['state']=1
@@ -259,7 +259,7 @@ def echo(message):
             #    return
 
             for user in free_users:
-                if user['state'] == 0 and user['gender']==False:
+                if user['state'] == 0 and user['gender']==False and user[user_id]!=user_id :
                     user['state']=1
                     free_users[user_id]['state']=1
                     user_to_id = user['ID']
@@ -288,7 +288,7 @@ def echo(message):
             #    return
 
             for user in free_users:
-                if user['state'] == 0:
+                if user['state'] == 0 and user[user_id]!=user_id:
                     user_to_id = user['ID']
                     user['state']=1
                     free_users[user_id]['state']=1
