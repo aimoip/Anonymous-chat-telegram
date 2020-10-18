@@ -11,6 +11,7 @@ class User(Base):
     username = Column(String, nullable=False)
     like = Column(Boolean, nullable=False)
     status = Column(Integer, nullable=False)
+    gender = Column(Boolean, nullable=False)
 
 
 class Contact(Base):
