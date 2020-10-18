@@ -201,6 +201,7 @@ def echo(message):
         bot.send_voice(communications[user_id]['UserTo'], message.voice.file_id)
     elif message.content_type == 'text':
         if message.text=="جستجوی جدید":
+            recovery_data()
             keyboard=generate_markup_for_gender_finder()
             bot.send_message(user_id, "دختر میخای یا پسر؟", reply_markup=keyboard)
             return
