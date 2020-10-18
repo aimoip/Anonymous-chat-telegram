@@ -19,6 +19,20 @@ def inline_menu():
     menu.add(callback)
 
     return menu
+    
+    
+def inline_menu_for_start():
+    """
+    Create inline menu for new chat
+    :return: InlineKeyboardMarkup
+    """
+    callback_boy_button = types.InlineKeyboardButton(text='من پسرم', callback_data='1')
+    callback_girl_button = types.InlineKeyboardButton(text='من دخترم', callback_data='0')
+
+    menu = types.InlineKeyboardMarkup()
+    menu.add(callback_boy_button,callback_girl_button)
+
+    return menu
 
 
 def generate_markup():
@@ -58,7 +72,7 @@ def echo(message):
         bot.send_message(user_id, m_is_not_user_name)
         return
 
-    menu = inline_menu()
+    menu = inline_menu_for_start()
 
     bot.send_message(user_id, m_start, reply_markup=menu)
 
@@ -188,6 +202,34 @@ def echo(call):
     :param call:
     :return:
     """
+    if call.data == 0 or call.data==1:
+        user_id = call.message.chat.id
+        user_to_id = None
+
+        add_users(chat=call.message.chat,g=call.data)
+
+        if len(free_users) < 2:
+            bot.send_message(user_id, m_is_not_free_users)
+            return
+
+        if free_users[user_id]['state'] == 0:
+            return
+
+        for user in free_users:
+            if user['state'] == 0:
+                user_to_id = user['ID']
+                break
+
+        if user_to_id is None:
+            bot.send_message(user_id, m_is_not_free_users)
+            return
+
+        keyboard = generate_markup()
+
+        add_communications(user_id, user_to_id)
+
+        bot.send_message(user_id, m_is_connect, reply_markup=keyboard)
+        bot.send_message(user_to_id, m_is_connect, reply_markup=keyboard)
     if call.data == 'NewChat':
         user_id = call.message.chat.id
         user_to_id = None
