@@ -189,9 +189,9 @@ def echo(message):
 
         bot.send_voice(communications[user_id]['UserTo'], message.voice.file_id)
     elif message.content_type == 'text':
-        if message.text=="man pesaram":
+        if message.text=="من پسرم":
             add_users(chat=message.chat,g=1)
-        elif message.text=="man dokhtaram":
+        elif message.text=="من دخترم":
             add_users(chat=message.chat,g=0)
             
         if message.text != '/start' and message.text != '/stop' and \
